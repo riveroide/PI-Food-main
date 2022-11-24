@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     id:{
       type: DataTypes.UUID, // para que no se repita con el de la API
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false, // no permite que esté vacio
+      // allowNull: false, // no permite que esté vacio
       primaryKey: true
     },
     title: {
@@ -30,5 +30,7 @@ module.exports = (sequelize) => {
     steps: {
       type: DataTypes.TEXT
     },   
-  });
+  },{
+    timestamps: false
+});
 };
