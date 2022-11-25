@@ -1,6 +1,7 @@
+require('dotenv').config();
 const axios = require('axios');
 
-const {YOUR_API_KEY} = process.env;
+const { YOUR_API_KEY } = process.env;
 const {Recipe,TypeDiet} = require('../db');
  //https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=10
  // f188937f0770482b9aac299da45f2db3
@@ -17,7 +18,7 @@ const getApiInfo = async () => {
             url: `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`,
             headers: {"Accept-Encoding": "null"}
         })
-        console.log(apiUrl)
+        console.log(YOUR_API_KEY)
         
         const apiInfo = await apiUrl.data.results?.map((e) =>{
             return{
