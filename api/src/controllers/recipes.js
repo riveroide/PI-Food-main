@@ -13,27 +13,24 @@ const {Recipe,TypeDiet} = require('../db');
 const getApiInfo = async () => {
     
     try {
-        const apiUrl = await axios({
+        const apiUrl= await axios({
             method: 'get',
-            url: `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`,
+            url: `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5 `,
             headers: {"Accept-Encoding": "null"}
         })
-        console.log(YOUR_API_KEY)
+        console.log(apiUrl.data.results)
         
         const apiInfo = await apiUrl.data.results?.map((e) =>{
             return{
                 id: e.id,
                 name: e.title,
-                summary: e.summary,
+                summary: e.summary.replaceAll(/<(“[^”]”|'[^’]’|[^'”>])*>/g, ""),
                 healthscore: e.healthScore,
                 image: e.image,
                 diets: e.diets,
+                dishtypes: e.dishTypes,
                 steps: e.analyzedInstructions[0]?.steps.map(e => {
-                    return {
-                        number: e.number,
-                        step: e.step,
-                        ingredients: e.ingredients,
-                    }
+                    return (e.step)
                 })
             }
         })
@@ -48,21 +45,39 @@ const getApiInfo = async () => {
 }
 
 const getDBinfo = async () => {
-    return await Recipe.findAll({
-        include: {
-            model: TypeDiet,
-            attributes: ['name'], // solo el name porque el id viene junto
-            through: {
-                attributes: [],
-            }
-        }})
+    try {
+        const recipes= await Recipe.findAll({
+            include: {
+                model: TypeDiet,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }})
+            return await recipes.map(e=>{
+                return{
+                    id: e.id,
+                    name: e.name,
+                    summary: e.summary,
+                    healthscore: e.healthscore,
+                    image: e.image,
+                    steps: e.steps,
+                    dishtypes: e.dishtypes,
+                    diets: e.TypeDiets.map(e=>e.name)
+                }
+            })
+    } catch (error) {
+        return res.status(404).send(error)
+    }
+
+    
 }
 
 const getALLRecipes = async () => {
     const apiInfo = await getApiInfo() 
     const dbInfo = await getDBinfo()
     console.log(apiInfo)
-    const allInfo = apiInfo.concat(dbInfo);
+    const allInfo = dbInfo.concat(apiInfo);
     return allInfo;
 }
 
