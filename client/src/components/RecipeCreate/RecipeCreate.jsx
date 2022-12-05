@@ -5,13 +5,26 @@ import { getDiets, postRecipes } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./RecipeCreate.css"
 
+function validate(input){
+    let errors={};
+    if(!input.name){
+        errors.name="Nombre requerido";
+    } if(!input.summary){
+        errors.name="Resumen requerido";
+    } else if(input.healtscore > 100){
+        errors.name = "El Healt Score debe ser menor que 100";
+    }
+    return errors;
+}
+
 function RecipeCreate() {
     const dispatch = useDispatch();
     const history = useHistory();
     const diets = useSelector(state => state.diets)
+    
 
     const [dataSteps, setDataSteps] = useState("")
-
+    const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         name: '',
         summary: '',
@@ -34,11 +47,15 @@ function RecipeCreate() {
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (input.name === "") {
+        if (input.name === "" || input.name === " ") {
             return alert("Por favor ingrese un nombre")
         }
         if (input.summary === "") {
@@ -48,8 +65,11 @@ function RecipeCreate() {
             setInput({
                 ...input,
                 image: "https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_640.png"
-            })
+            })}
+        if (input.healthscore > 100 || input.healthscore < 0){
+            return alert("El valor del Health Score tiene que ser de 0 a 100. Ingrese uno válido")
         }
+        
         dispatch(postRecipes(input))
         alert("La receta fue creada exitosamente")
         setInput({
@@ -130,15 +150,18 @@ function RecipeCreate() {
                         <div>
                             <label>Resumen:</label>
                             <textarea className="inputdata" value={input.summary} name="summary" rows="5" cols="35" onChange={handleChange} />
+                            
                         </div>
+                        
                         <div>
                             <label>Tipo de plato: </label>
                             <input type="text" className="inputdata" value={input.dishtype} name="dishtype" onChange={handleChange} />
                         </div>
                         <div>
                             <label>Health Score: </label>
-                            <input name="healthscore" className="inputdata" type="number" min="1" max="100" value={input.healthscore} onChange={handleChange}></input>
+                            <input name="healthscore" className="inputdata" type="number" value={input.healthscore} onChange={handleChange}></input>
                         </div>
+                        {errors.name &&(<p className="error">{errors.name}</p>)} 
                     </div>
 
                     <div className="containercheck">

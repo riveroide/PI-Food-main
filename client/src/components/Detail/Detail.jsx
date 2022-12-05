@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { getRecipebyID, Loading} from '../../actions';
+import { getRecipebyID, Loading } from '../../actions';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
+import "./Detail.css"
 
 function Detail() {
     const dispatch = useDispatch();
@@ -15,40 +16,52 @@ function Detail() {
     const { id } = useParams();
     console.log(id)
 
-    
+
     useEffect(async () => {
         dispatch(Loading());
         await dispatch(getRecipebyID(id));
         dispatch(Loading());
     }, [dispatch]);
 
-    if(loader===true && recetas[0] && recetas[0].id==id){
+    if (loader === true && recetas[0] && recetas[0].id == id) {
         return (
-            <div style={{backgroundColor:'aqua'}} >
-                        <div>
-                            <Link to={`/home`}>Volver</Link>
-                        </div>
-                        <h2>{recetas[0].name}</h2>
+            <div className='detailscontainer' >
+                <div className='botondevolver'>
+                    <Link to={`/home`}><button>Volver</button></Link>
+                </div>
+                <h2 className='titlerecipe'>{recetas[0].name}</h2>
+                <div className='imgyresumen'>
+                    <div className='imgrecipe'>
                         <img src={recetas[0].image} alt="img not found" width="350px" height="250px" />
-                        <p>Resumen: {recetas[0].summary}</p>
-                        <h3>Health Score: {recetas[0].healthscore}</h3>
-                        <h4>Tipo de dieta: {recetas[0].diets}</h4>
-                        <h4>Tipo de plato: {recetas[0].dishtypes}</h4>
-                        <h5>Steps:</h5>
-                        <ol>
-                            {Array.isArray(recetas[0].steps) ? recetas[0].steps.map(e => {
+                    </div>
+                    <div className='resumenrecipe'>
+                        <h4>Resumen:</h4><p>{recetas[0].summary}</p>
+                    </div>
+                </div>
+
+                <div className='recipecarac'>
+                    <div><h4>Health Score:</h4><p>{recetas[0].healthscore}</p></div>
+                    <div><h4>Tipo de dieta:</h4><p>{recetas[0].diets.join(", ")}</p></div>
+                    <div><h4>Tipo de plato:</h4><p>{recetas[0].dishtypes}</p></div>
+
+                </div>
+
+                <div className='stepsinfo'>
+                    <h4 className='titlesteps'>Paso a paso:</h4>
+                    <ol>
+                        {Array.isArray(recetas[0].steps) ? recetas[0].steps.map(e => {
                             return (
                                 <li>{e}</li>
                             )
-                        
-                        
-                        }) : <h5>{recetas[0].step}</h5>}</ol>
+                        }) : <p>No se informaron pasos a seguir para esta receta</p>}</ol>
+                </div>
+
             </div>
         );
-    }else{ return(
-        <Loader/>
-    )
-        
+    } else {
+        return (
+            <Loader />
+        )
     }
 }
 

@@ -7,7 +7,6 @@ import Loader from '../Loader/Loader';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import SearchBar from '../SearchBar/SearchBar';
-import { useParams } from 'react-router-dom';
 import './Home.css'
 
 export default function Home() {
@@ -40,17 +39,19 @@ export default function Home() {
 
 
     function handleCLick(e) {
-        e.preventDefault(); // para que no se recargue la pagina y no se rompa
+        e.preventDefault();
+        dispatch(Loading());
+        setCurrentPage(1);
         dispatch(getRecipes());
+        dispatch(Loading());
     }
 
     async function handleFilterDiets(e) {
         e.preventDefault();
-
+        dispatch(Loading());
         await dispatch(getRecipes());
-
         dispatch(filterByDiets(e.target.value))
-
+        dispatch(Loading());
     }
 
     function handleSortName(e) {

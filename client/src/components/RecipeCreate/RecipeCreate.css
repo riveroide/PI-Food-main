@@ -63,8 +63,14 @@
     margin: 0 80px;
 }
 
+.error{
+    font-size: medium;
+    color: #d00000;
+    text-shadow: 4px 4px 4px rgb(124, 124, 124);
+}
 .inputdata {
     resize: none;
+    width: 100%;
 }
 
 .containercheck {
@@ -181,3 +187,4 @@
 .mandareceta button:hover::before {
     width: 100%;
 }
+
