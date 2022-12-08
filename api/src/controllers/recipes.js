@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const { YOUR_API_KEY } = process.env;
+const { API } = process.env;
 const {Recipe,TypeDiet} = require('../db');
 
 
@@ -10,7 +10,7 @@ const getApiInfo = async () => {
     try {
         const apiUrl= await axios({
             method: 'get',
-            url: `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`,
+            url: "https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5",
             headers: {"Accept-Encoding": "null"}
         })
         
