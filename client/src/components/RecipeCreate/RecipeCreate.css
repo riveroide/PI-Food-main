@@ -2,9 +2,10 @@
     flex-direction: column;
     background-image: url("https://cdn.pixabay.com/photo/2022/10/23/22/40/vegetables-7542255_960_720.jpg");
     background-size: cover;
-    height: 100%;
-    color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    background-attachment:fixed;
+    height: auto;
+    min-height: 100vh;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .botondevolver {
@@ -64,9 +65,10 @@
 }
 
 .error{
-    font-size: medium;
+    font-size: small;
     color: #d00000;
     text-shadow: 4px 4px 4px rgb(124, 124, 124);
+    margin: 0;
 }
 .inputdata {
     resize: none;

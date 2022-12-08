@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getRecipes(){
     return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/recipes",{});
+        var json = await axios.get("https://pifoodback-production-a96f.up.railway.app/recipes",{});
         return dispatch({
         type:'GET_RECIPES',
         payload: json.data
@@ -34,7 +34,7 @@ export function orderByHS(payload){
 export function getNameRecipe(payload){
     return async function (dispatch){
         try {
-            var json= await axios.get('http://localhost:3001/recipes?name=' + payload)
+            var json= await axios.get('https://pifoodback-production-a96f.up.railway.app/recipes?name=' + payload)
             return dispatch({
                 type: "GET_NAME_RECIPE",
                 payload: json.data
@@ -46,8 +46,7 @@ export function getNameRecipe(payload){
 }
 export function getDiets(){
     return async function(dispatch){
-        var json = await axios.get ("http://localhost:3001/diets",{});
-        console.log(json.data)
+        var json = await axios.get ("https://pifoodback-production-a96f.up.railway.app/diets",{});
         return dispatch({
             type:'GET_DIETS',
             payload: json.data
@@ -57,7 +56,7 @@ export function getDiets(){
 
 export function getRecipebyID(id){
     return async function(dispatch){
-        var json = await axios.get(`http://localhost:3001/recipes/${id}`,{});
+        var json = await axios.get(`https://pifoodback-production-a96f.up.railway.app/recipes/${id}`,{});
         return dispatch({
             type: 'GET_RECIPE_BY_ID',
             payload:json.data
@@ -67,7 +66,7 @@ export function getRecipebyID(id){
 
 export function postRecipes(payload){
     return async function(dispatch){
-        var json = await axios.post("http://localhost:3001/recipes",payload);
+        var json = await axios.post("https://pifoodback-production-a96f.up.railway.app/recipes",payload);
         return json
         }
     }

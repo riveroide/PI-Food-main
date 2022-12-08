@@ -18,6 +18,7 @@ export default function Home() {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [orden, setOrden] = useState('')
+    const [filtername, setFilterName] = useState('')
 
 
     const recipesPerPage = 9;
@@ -48,10 +49,11 @@ export default function Home() {
 
     async function handleFilterDiets(e) {
         e.preventDefault();
-        dispatch(Loading());
         await dispatch(getRecipes());
+        
         dispatch(filterByDiets(e.target.value))
-        dispatch(Loading());
+        setCurrentPage(1);
+        
     }
 
     function handleSortName(e) {
@@ -71,11 +73,12 @@ export default function Home() {
                 <div className="buttontopcont">
                     <Link to='/createrecipe'><button >Crear Receta</button></Link>
                     <button className='buttonrecet' onClick={e => { handleCLick(e) }}>
-                        Reset recetas
+                        Restablecer
                     </button>
                 </div>
                 <div className='searchbarcontainer'>
-                    <SearchBar />
+                    <SearchBar 
+                    paginado={paginado}/>
                 </div>
                 <div className='filterselects'>
                     <select className='classic' onChange={e => handleSortName(e)}>
@@ -84,7 +87,7 @@ export default function Home() {
                         <option value="desc">Z-A</option>
                     </select>
                     <select className='classic' onChange={e => handleFilterDiets(e)}>
-                        <option value="all">Todos los tipos de receta</option>
+                        <option value="filtrado">Todos los tipos de receta</option>
                         {diets?.map((e) => {
                             return (
                                 <option value={e.name} key={e.id}>{e.name}</option>)
@@ -110,6 +113,11 @@ export default function Home() {
                     })}
 
                 </div>
+                <Paginado className="numspags"
+                    currentPage={currentPage}
+                    recipesPerPage={recipesPerPage}
+                    allRecipes={allRecipes.length}
+                    paginado={paginado} />
             </div>
         )
     } else {

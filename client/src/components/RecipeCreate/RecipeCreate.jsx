@@ -10,10 +10,11 @@ function validate(input){
     if(!input.name){
         errors.name="Nombre requerido";
     } if(!input.summary){
-        errors.name="Resumen requerido";
-    } else if(input.healtscore > 100){
-        errors.name = "El Healt Score debe ser menor que 100";
+        errors.summary="Resumen requerido";
+    } if(input.healthscore > 100 || input.healthscore < 0){
+        errors.healthscore = "El Healt Score debe ser entre 0 y 100";
     }
+    
     return errors;
 }
 
@@ -55,13 +56,10 @@ function RecipeCreate() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (input.name === "" || input.name === " ") {
-            return alert("Por favor ingrese un nombre")
-        }
         if (input.summary === "") {
             return alert("Por favor ingrese un resumen de plato")
         }
-        if (input.image === "") {
+        if (input.image === " ") {
             setInput({
                 ...input,
                 image: "https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_640.png"
@@ -77,6 +75,7 @@ function RecipeCreate() {
             summary: '',
             image: '',
             healthscore: '',
+            dishtype:'',
             steps: [],
             diets: [],
         })
@@ -128,8 +127,6 @@ function RecipeCreate() {
     }
 
 
-    console.log(input)
-
     return (
         <div className="maincontainer">
             <div className="botondevolver">
@@ -143,6 +140,7 @@ function RecipeCreate() {
                             <label>Nombre: </label>
                             <input type="text" className="inputdata" value={input.name} name="name" onChange={handleChange} />
                         </div>
+                        {errors.name &&(<p className="error">{errors.name}</p>)} 
                         <div>
                             <label>Imagen: </label>
                             <input type="text" value={input.image} name="image" className="inputdata" onChange={handleChange}></input>
@@ -150,7 +148,7 @@ function RecipeCreate() {
                         <div>
                             <label>Resumen:</label>
                             <textarea className="inputdata" value={input.summary} name="summary" rows="5" cols="35" onChange={handleChange} />
-                            
+                            {errors.summary &&(<p className="error">{errors.summary}</p>)} 
                         </div>
                         
                         <div>
@@ -161,7 +159,8 @@ function RecipeCreate() {
                             <label>Health Score: </label>
                             <input name="healthscore" className="inputdata" type="number" value={input.healthscore} onChange={handleChange}></input>
                         </div>
-                        {errors.name &&(<p className="error">{errors.name}</p>)} 
+                        {errors.healthscore &&(<p className="error">{errors.healthscore}</p>)} 
+                        
                     </div>
 
                     <div className="containercheck">

@@ -6,6 +6,7 @@ const initialState = {
     loader: true,
 }
 
+
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_RECIPES':
@@ -21,7 +22,6 @@ function rootReducer(state = initialState, action) {
                     recipes: result,
                 }
             } else {
-                console.log(result, "result");
                 const ff = result.filter(r => r.diets?.some((d) => d === action.payload))
                 return {
                     ...state,

@@ -4,7 +4,7 @@
     height: 450px;
     background: rgba(217, 217, 217, 0.08);
     border: 1px solid white;
-    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.50);
     backdrop-filter: blur(6px);
     border-radius: 17px;
     text-align: center;
@@ -45,7 +45,7 @@
 }
 
 .carddescr{
-    color: #a3b18a;
-    text-shadow: 5px 5px 5px rgb(19, 18, 18);
+    color: #dad7cd;
+    text-shadow: 5px 5px 5px rgb(15, 15, 15);
     margin-bottom: 5px;
 }

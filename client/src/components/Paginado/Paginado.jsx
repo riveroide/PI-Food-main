@@ -17,7 +17,7 @@ export default function Paginado({ recipesPerPage, allRecipes, paginado, current
 
             {pageNumbers &&
                 pageNumbers.map(number => {
-                    return(<button className={`numberpage ${number==currentPage?"paginaactiva":null}`}key={number} onClick={() => paginado(number)}>{currentPage === number ? <b>{number}</b> : number}</button>)
+                    return(<button className={`numberpage ${number===currentPage?"paginaactiva":null}`}key={number} onClick={() => paginado(number)}>{currentPage === number ? <b>{number}</b> : number}</button>)
                     })}
             <button className="flechaspag" onClick={() => paginado(currentPage === 0 ? pageNumbers.length : currentPage + 1)}> 🢂 </button>
         </div>

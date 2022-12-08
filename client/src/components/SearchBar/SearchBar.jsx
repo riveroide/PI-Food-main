@@ -5,7 +5,7 @@ import { getNameRecipe,Loading } from "../../actions";
 import Loader from "../Loader/Loader";
 import './SearchBar.css'
 
-export default function SearchBar(){
+export default function SearchBar({paginado}){
 const dispatch = useDispatch()
 
 const loader = useSelector(state=> state.loader)
@@ -22,6 +22,7 @@ async function handleSubmit(e){
     dispatch(Loading());
     await dispatch(getNameRecipe(name))
     dispatch(Loading());
+    paginado(1)
     setName("")
 }
 

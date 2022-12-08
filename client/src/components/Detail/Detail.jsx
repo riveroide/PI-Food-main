@@ -12,9 +12,9 @@ function Detail() {
     const recetas = useSelector((state) => state.recipeByID);
     const loader = useSelector(state => state.loader)
 
-    console.log(recetas)
+    
     const { id } = useParams();
-    console.log(id)
+    
 
 
     useEffect(async () => {

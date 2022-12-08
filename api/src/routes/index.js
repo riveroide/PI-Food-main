@@ -4,8 +4,6 @@ const { Router } = require('express');
 const getRecipeRoute = require("./getRecipes.js");
 const postRecipeRoute = require("./postRecipes.js");
 const getDietRoute = require("./getDiets.js");
-const deleteRecipeRoute = require("./deleteRecipes");
-
 
 const router = Router();
 
@@ -14,6 +12,5 @@ const router = Router();
 router.use("/diets", getDietRoute);
 router.use("/recipes", getRecipeRoute);
 router.use("/recipes", postRecipeRoute);
-router.use("/recipes", deleteRecipeRoute);
 
 module.exports = router;

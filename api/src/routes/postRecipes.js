@@ -10,7 +10,7 @@ router.post("/", async(req,res) => {
             name,
             summary,
             healthscore,
-            image,
+            image: image?image:'https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_640.png',
             steps,
             dishtypes
         });

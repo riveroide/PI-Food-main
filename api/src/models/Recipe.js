@@ -23,6 +23,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
+      defaultValue:'https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_640.png'
     },
     steps: {
       type: DataTypes.ARRAY(DataTypes.STRING)

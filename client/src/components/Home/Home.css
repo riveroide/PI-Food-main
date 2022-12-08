@@ -3,6 +3,8 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    width: 100%;
+    min-width: 100vh;
 }
 
 .cards {
@@ -18,9 +20,10 @@
 
 .buttontopcont {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0px 300px;
+    justify-content:space-around;
+    
+    width: auto;
+    max-width: 100%;
     
 }
 
@@ -61,8 +64,10 @@
 
 .filterselects {
     display: flex;
-    justify-content: space-between;
-    margin: 4px 310px;
+    align-items: center;
+    justify-content:space-around;
+    width: auto;
+    min-width: 30vh;
 
 }
 
