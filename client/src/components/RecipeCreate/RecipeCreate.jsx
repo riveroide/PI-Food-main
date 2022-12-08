@@ -31,7 +31,7 @@ function RecipeCreate() {
         summary: '',
         image: '',
         healthscore: '',
-        dishtype: '',
+        dishtypes: '',
         steps: [],
         diets: [],
     })
@@ -56,6 +56,9 @@ function RecipeCreate() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (input.name === "") {
+            return alert("Por favor ingrese un nombre de plato")
+        }
         if (input.summary === "") {
             return alert("Por favor ingrese un resumen de plato")
         }
@@ -75,7 +78,7 @@ function RecipeCreate() {
             summary: '',
             image: '',
             healthscore: '',
-            dishtype:'',
+            dishtypes:[],
             steps: [],
             diets: [],
         })
@@ -141,10 +144,10 @@ function RecipeCreate() {
                             <input type="text" className="inputdata" value={input.name} name="name" onChange={handleChange} />
                         </div>
                         {errors.name &&(<p className="error">{errors.name}</p>)} 
-                        <div>
+                        {/* <div>
                             <label>Imagen: </label>
                             <input type="text" value={input.image} name="image" className="inputdata" onChange={handleChange}></input>
-                        </div>
+                        </div> */}
                         <div>
                             <label>Resumen:</label>
                             <textarea className="inputdata" value={input.summary} name="summary" rows="5" cols="35" onChange={handleChange} />
@@ -153,7 +156,7 @@ function RecipeCreate() {
                         
                         <div>
                             <label>Tipo de plato: </label>
-                            <input type="text" className="inputdata" value={input.dishtype} name="dishtype" onChange={handleChange} />
+                            <input type="text" className="inputdata" value={input.dishtypes} name="dishtypes" onChange={handleChange} />
                         </div>
                         <div>
                             <label>Health Score: </label>

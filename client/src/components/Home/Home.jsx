@@ -18,7 +18,6 @@ export default function Home() {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [orden, setOrden] = useState('')
-    const [filtername, setFilterName] = useState('')
 
 
     const recipesPerPage = 9;
