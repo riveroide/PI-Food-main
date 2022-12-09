@@ -3,7 +3,8 @@
     background-image: url("https://images.pexels.com/photos/616404/pexels-photo-616404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-size:cover;
     background-attachment: fixed;
-    height:auto
+    height:auto;
+    min-height: 100vh;
 }
 
 .titlerecipe {
